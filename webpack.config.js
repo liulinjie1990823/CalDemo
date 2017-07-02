@@ -4,16 +4,19 @@
 var webpack = require("webpack");
 var path = require("path");
 
-var SRC_DIR = path.resolve(__dirname, "src");
-var DIST_DIR = path.resolve(__dirname, "app");
+var SRC_DIR = path.resolve(__dirname, "src");//源码文件
+var DIST_DIR = path.resolve(__dirname, "app");//编译后的文件
 
 module.exports = {
     devtool: 'cheap-module-eval-source-map',//错误快速定位到源码
-    entry: SRC_DIR + "/containers/index.js",//入口文件
+    // entry: SRC_DIR + "/containers/index.js",//入口文件
+    entry: {
+        "bundle": SRC_DIR + "/containers/index.js",
+    },//入口文件
     output: {//输出打包文件路径和名称
-        path: DIST_DIR,//本地文件输出的路径,默认和当前文件同级(不设置会在当前)
-        filename: "bundle.js",//内存或者本地打包文件的名称
-        publicPath: "/app"//
+        path: DIST_DIR,//本地文件输出的路径,默认和当前文件同级(不设置会在当前目录输出)
+        filename: "[name].js",//内存或者本地打包文件的名称
+        publicPath: "/app"//1.开发环境指的的内存中的打包文件
     },
     resolve: {
         extensions: ['.js', '.jsx']
